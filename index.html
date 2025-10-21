@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>桌游掌握程度填写</title>
+</head>
+<body>
+  <h2>填写你玩过的桌游</h2>
+  <form id="form">
+    <label>你的姓名：</label><input name="name" required><br>
+    <label>桌游名称：</label>
+    <select name="game">
+      <option>狼人杀</option>
+      <option>阿瓦隆</option>
+      <option>UNO</option>
+      <option>谁是卧底</option>
+    </select><br>
+    <label>掌握程度（1~5）：</label>
+    <input type="number" name="level" min="1" max="5" required><br>
+    <label>玩过几次：</label>
+    <input type="number" name="times" min="1" required><br>
+    <button type="submit">提交</button>
+  </form>
+  <p id="msg"></p>
+
+  <script>
+    document.getElementById("form").onsubmit = async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e。target));
+      await fetch("https://你的后端地址/submit"， {
+        method: "POST",
+        body: JSON。stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
+      document.getElementById("msg").innerText = "提交成功！";
+    };
+  </script>
+</body>
+</html>
